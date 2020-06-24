@@ -18,11 +18,10 @@ namespace BankingDomain
 
         public void Withdraw(decimal amountToWithdraw)
         {
-            if (amountToWithdraw < _currentBalance)
+            if (amountToWithdraw <= _currentBalance)
             {
                 _currentBalance -= amountToWithdraw;
-            }
-            else
+            } else
             {
                 throw new OverdraftException();
             }

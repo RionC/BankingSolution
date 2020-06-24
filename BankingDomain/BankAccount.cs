@@ -11,7 +11,8 @@ namespace BankingDomain
             return _currentBalance;
         }
 
-        public void Deposit(decimal amountToDeposit)
+        // Overridable
+        public virtual void Deposit(decimal amountToDeposit)
         {
             _currentBalance += amountToDeposit;
         }

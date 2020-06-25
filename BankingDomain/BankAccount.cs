@@ -6,10 +6,12 @@ namespace BankingDomain
     {
         private decimal _currentBalance = 5000;
         private ICalculateBonuses _bonusCalculator;
+        private INarcOnAccounts _feds;
 
-        public BankAccount(ICalculateBonuses bonusCalculator)
+        public BankAccount(ICalculateBonuses bonusCalculator, INarcOnAccounts feds)
         {
             _bonusCalculator = bonusCalculator;
+            _feds = feds;
         }
 
         public decimal GetBalance()
@@ -27,8 +29,10 @@ namespace BankingDomain
         {
             if (amountToWithdraw <= _currentBalance)
             {
+                _feds.NotifyOfWithdrawal(this, amountToWithdraw);
                 _currentBalance -= amountToWithdraw;
-            } else
+            } 
+            else
             {
                 throw new OverdraftException();
             }

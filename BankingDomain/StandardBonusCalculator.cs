@@ -23,7 +23,7 @@ namespace BankingDomain
             }
         }
 
-        private bool BeforeCutoff()
+        protected virtual bool BeforeCutoff()
         {
             return DateTime.Now.Hour < 17;
         }

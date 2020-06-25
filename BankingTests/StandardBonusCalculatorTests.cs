@@ -13,7 +13,7 @@ namespace BankingTests
         [InlineData(100, 10000, 10)]
         public void CanCalculateBonusesBeforeCutoff(decimal deposit, decimal balance, decimal expected)
         {
-            ICalculateBonuses bonusCalculator = new StandardBonusCalculator();
+            ICalculateBonuses bonusCalculator = new TestingStandardBonusCalculator(true);
             var bonus = bonusCalculator.GetDepositBonusFor(deposit, balance);
 
             Assert.Equal(expected, bonus);
@@ -24,10 +24,25 @@ namespace BankingTests
         [InlineData(100, 10000, 5)]
         public void CanCalculateBonusesAfterCutoff(decimal deposit, decimal balance, decimal expected)
         {
-            ICalculateBonuses bonusCalculator = new StandardBonusCalculator();
+            ICalculateBonuses bonusCalculator = new TestingStandardBonusCalculator(false);
             var bonus = bonusCalculator.GetDepositBonusFor(deposit, balance);
 
             Assert.Equal(expected, bonus);
+        }
+    }
+
+    public class TestingStandardBonusCalculator : StandardBonusCalculator
+    {
+        private bool isBeforeCutoff;
+
+        public TestingStandardBonusCalculator(bool isBeforeCutoff)
+        {
+            this.isBeforeCutoff = isBeforeCutoff;
+        }
+
+        protected override bool BeforeCutoff()
+        {
+            return isBeforeCutoff;
         }
     }
 }

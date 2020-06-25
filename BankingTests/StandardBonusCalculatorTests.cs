@@ -1,4 +1,5 @@
 ﻿using BankingDomain;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,9 @@ namespace BankingTests
         [InlineData(100, 10000, 10)]
         public void CanCalculateBonusesBeforeCutoff(decimal deposit, decimal balance, decimal expected)
         {
-            ICalculateBonuses bonusCalculator = new TestingStandardBonusCalculator(true);
+            var systemTimeFake = new Mock<ISystemTime>();
+            systemTimeFake.Setup(s => s.GetCurrent()).Returns(new DateTime(1992, 7, 22, 16, 59, 59));
+            ICalculateBonuses bonusCalculator = new StandardBonusCalculator(systemTimeFake.Object);
             var bonus = bonusCalculator.GetDepositBonusFor(deposit, balance);
 
             Assert.Equal(expected, bonus);
@@ -24,25 +27,27 @@ namespace BankingTests
         [InlineData(100, 10000, 5)]
         public void CanCalculateBonusesAfterCutoff(decimal deposit, decimal balance, decimal expected)
         {
-            ICalculateBonuses bonusCalculator = new TestingStandardBonusCalculator(false);
+            var systemTimeFake = new Mock<ISystemTime>();
+            systemTimeFake.Setup(s => s.GetCurrent()).Returns(new DateTime(1992, 7, 22, 17, 00, 00));
+            ICalculateBonuses bonusCalculator = new StandardBonusCalculator(systemTimeFake.Object);
             var bonus = bonusCalculator.GetDepositBonusFor(deposit, balance);
 
             Assert.Equal(expected, bonus);
         }
     }
 
-    public class TestingStandardBonusCalculator : StandardBonusCalculator
-    {
-        private bool isBeforeCutoff;
+    //public class TestingStandardBonusCalculator : StandardBonusCalculator
+    //{
+    //    private bool isBeforeCutoff;
 
-        public TestingStandardBonusCalculator(bool isBeforeCutoff)
-        {
-            this.isBeforeCutoff = isBeforeCutoff;
-        }
+    //    public TestingStandardBonusCalculator(bool isBeforeCutoff)
+    //    {
+    //        this.isBeforeCutoff = isBeforeCutoff;
+    //    }
 
-        protected override bool BeforeCutoff()
-        {
-            return isBeforeCutoff;
-        }
-    }
+    //    protected override bool BeforeCutoff()
+    //    {
+    //        return isBeforeCutoff;
+    //    }
+    //}
 }

@@ -4,6 +4,13 @@ namespace BankingDomain
 {
     public class StandardBonusCalculator : ICalculateBonuses
     {
+        ISystemTime _systemTime;
+
+        public StandardBonusCalculator(ISystemTime systemTime)
+        {
+            _systemTime = systemTime;
+        }
+
         decimal ICalculateBonuses.GetDepositBonusFor(decimal amountToDeposit, decimal currentBalance)
         {
             if (currentBalance >= 10000)
@@ -25,7 +32,7 @@ namespace BankingDomain
 
         protected virtual bool BeforeCutoff()
         {
-            return DateTime.Now.Hour < 17;
+            return _systemTime.GetCurrent().Hour < 17;
         }
     }
 }

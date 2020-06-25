@@ -11,7 +11,7 @@ namespace BankingTests
         [Fact]
         public void NewAccountHaveCorrectBalance()
         {
-            var account = new BankAccount();
+            var account = new BankAccount(new DummyBonusCalculator());
             decimal balance = account.GetBalance();
 
             Assert.Equal(5000M, balance);

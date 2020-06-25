@@ -21,20 +21,32 @@ namespace BankingDomain
 
         public void Deposit(decimal amountToDeposit)
         {
+            IsPossitiveAmount(amountToDeposit);
+
             decimal amountOfBonus = _bonusCalculator.GetDepositBonusFor(amountToDeposit, _currentBalance);
-            _currentBalance += amountToDeposit + amountOfBonus;
+            _currentBalance += amountToDeposit + amountOfBonus; 
         }
 
         public void Withdraw(decimal amountToWithdraw)
         {
+            IsPossitiveAmount(amountToWithdraw);
+
             if (amountToWithdraw <= _currentBalance)
             {
                 _feds.NotifyOfWithdrawal(this, amountToWithdraw);
                 _currentBalance -= amountToWithdraw;
-            } 
+            }
             else
             {
                 throw new OverdraftException();
+            }
+        }
+
+        private void IsPossitiveAmount(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                throw new BadAmountException();
             }
         }
     }

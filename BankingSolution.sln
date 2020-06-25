@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingTests", "BankingTests\BankingTests.csproj", "{6C028866-8BCF-46BC-9A67-491FE3B0B50D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingTests", "BankingTests\BankingTests.csproj", "{6C028866-8BCF-46BC-9A67-491FE3B0B50D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingDomain", "BankingDomain\BankingDomain.csproj", "{1600BCB9-8FF6-4702-A81D-204FFC92273F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingDomain", "BankingDomain\BankingDomain.csproj", "{1600BCB9-8FF6-4702-A81D-204FFC92273F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankKiosk", "BankKiosk\BankKiosk.csproj", "{98B28FE6-70E0-4D06-AD96-8ACA174C6816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1600BCB9-8FF6-4702-A81D-204FFC92273F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1600BCB9-8FF6-4702-A81D-204FFC92273F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1600BCB9-8FF6-4702-A81D-204FFC92273F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B28FE6-70E0-4D06-AD96-8ACA174C6816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B28FE6-70E0-4D06-AD96-8ACA174C6816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B28FE6-70E0-4D06-AD96-8ACA174C6816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B28FE6-70E0-4D06-AD96-8ACA174C6816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

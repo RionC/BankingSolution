@@ -12,11 +12,22 @@ namespace BankingTests
         [InlineData(0)]
         [InlineData(-0.1)]
         [InlineData(-1)]
-        public void ThrowForBadAmounts(decimal badAmount)
+        public void DepositThrowForBadAmounts(decimal badAmount)
         {
             var account = new BankAccount(null, null);
 
             Assert.Throws<BadAmountException>(() => account.Deposit(badAmount));
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-0.1)]
+        [InlineData(-1)]
+        public void WithdrawThrowsForBadAmounts(decimal badAmount)
+        {
+            var account = new BankAccount(null, null);
+
+            Assert.Throws<BadAmountException>(() => account.Withdraw(badAmount));
         }
     }
 }
